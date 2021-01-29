@@ -1,0 +1,20 @@
+package com.hegong.controller;
+
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+
+import java.sql.SQLOutput;
+
+/**
+ * @author 14767
+ */
+@Controller
+@RequestMapping("/user")
+public class UserController {
+    @RequestMapping("/testInterceptor")
+    public String testInterceptor(){
+        System.out.println("testInterceptor执行了。。。");
+        return "success";
+    }
+
+}

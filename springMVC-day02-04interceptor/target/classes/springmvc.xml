@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans
+        http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/mvc
+        http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/context
+        http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+    <!--开启注解的扫描 -->
+    <context:component-scan base-package="com.hegong"></context:component-scan>
+
+
+    <!--视图的解析器 -->
+    <bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix" value="/WEB-INF/pages/"></property>
+        <property name="suffix" value=".jsp"></property>
+    </bean>
+
+
+    <!--配置拦截器可以配置很多个 -->
+    <mvc:interceptors>
+        <!--配置单个拦截器 -->
+        <mvc:interceptor>
+            <!--表示/user下的controller的方法都拦截 -->
+            <mvc:mapping path="/user/**"/>
+            <!--配置拦截器对象 -->
+            <bean class="com.hegong.interceptor.MyInterceptor1"></bean>
+            <!--exclude表示不拦截的路径，该标签和mvc:mapping二选一配置即可 -->
+<!--            <mvc:exclude-mapping path=""/>-->
+        </mvc:interceptor>
+    </mvc:interceptors>
+
+    <!--开启springmvc框架注解支持 -->
+    <mvc:annotation-driven />
+</beans>
